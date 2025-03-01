@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 logoIntro.style.opacity = '0';
                 setTimeout(() => {
                     logoIntro.style.display = 'none';
-                }, 500);
-            }, 2000);
+                },);
+            }, 5500);
             // Set visited flag
             sessionStorage.setItem('hasVisited', 'true');
         }
