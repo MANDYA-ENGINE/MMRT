@@ -23,3 +23,7 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: ujwal26/my-website:latest
+      
+      - name: Deploy to Render
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+ 
