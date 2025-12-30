@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the Docker Image
-        run: docker build -t my-website .
+        run: docker build --platform linux/amd64 -t my-website .
 
       - name: Verify Container Starts
         run: |
