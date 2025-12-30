@@ -1,0 +1,21 @@
+name: Docker Build and Test
+
+on:
+  push:
+    branches: [ "main" ] # Runs every time you push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build the Docker Image
+        run: docker build -t my-website .
+
+      - name: Verify Container Starts
+        run: |
+          docker run -d -p 8080:80 --name test-site my-website
+          sleep 5
+          docker ps | grep test-site
