@@ -1,5 +1,4 @@
 name: Docker Build, Test, and Push
-
 on:
   push:
     branches: [ "main" ]
