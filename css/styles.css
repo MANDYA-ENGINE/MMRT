@@ -421,12 +421,13 @@ section {
     margin: 0 auto 1rem;
 }
 
-.core-grid-four {
+.core-grid-two {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .member-card {
@@ -493,34 +494,14 @@ section {
     font-weight: 600;
 }
 
-.directors-carousel-container {
-    overflow-x: auto;
-    overflow-y: hidden;
-    position: relative;
-    width: 100%;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    cursor: grab;
-}
-
-.directors-carousel-container::-webkit-scrollbar {
-    display: none;
-}
-
-.directors-carousel-container:active {
-    cursor: grabbing;
-}
-
-.directors-carousel {
-    display: flex;
+.directors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    width: max-content;
+    margin-top: 2rem;
 }
 
 .director-card {
-    flex: 0 0 auto;
-    width: 150px;
     text-align: center;
     transition: transform var(--transition-speed);
 }
@@ -530,8 +511,9 @@ section {
 }
 
 .director-card .member-image {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    max-width: 150px;
+    aspect-ratio: 1;
     margin: 0 auto 1rem;
     background: var(--color-cream);
     display: flex;
@@ -544,7 +526,7 @@ section {
 }
 
 .director-card .member-name {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     margin-bottom: 0;
 }
 
@@ -685,17 +667,17 @@ section {
         height: 150px;
     }
 
-    .core-grid-four {
+    .core-grid-two {
         gap: 1rem;
     }
 
-    .director-card {
-        width: 120px;
+    .directors-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
     }
 
     .director-card .member-image {
-        width: 120px;
-        height: 120px;
+        max-width: 120px;
     }
 }
 
@@ -744,9 +726,8 @@ section {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .core-grid-four {
-        grid-template-columns: repeat(4, 1fr);
-        max-width: 800px;
+    .core-grid-two {
+        max-width: 600px;
     }
 
     .president-card .member-image {
@@ -754,13 +735,13 @@ section {
         height: 250px;
     }
 
-    .director-card {
-        width: 180px;
+    .directors-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
     }
 
     .director-card .member-image {
-        width: 180px;
-        height: 180px;
+        max-width: 180px;
     }
 
     .footer-map iframe {
@@ -820,8 +801,8 @@ section {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .core-grid-four {
-        max-width: 900px;
+    .core-grid-two {
+        max-width: 700px;
     }
 
     .president-card .member-image {
@@ -829,13 +810,13 @@ section {
         height: 280px;
     }
 
-    .director-card {
-        width: 200px;
+    .directors-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
     }
 
     .director-card .member-image {
-        width: 200px;
-        height: 200px;
+        max-width: 200px;
     }
 
     .footer-map iframe {
