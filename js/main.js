@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Language toggle functionality
     const languageToggle = document.getElementById('languageToggle');
     if (languageToggle) {
-        // Set initial button text based on current language
+        // Button always shows "English"
         const langText = languageToggle.querySelector('.lang-text');
         if (langText) {
-            langText.textContent = currentLang === 'kn' ? 'English' : 'ಕನ್ನಡ';
+            langText.textContent = 'English';
         }
         
         languageToggle.addEventListener('click', function() {
@@ -38,11 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.documentElement.lang = currentLang;
             localStorage.setItem('language', currentLang);
             updateLanguage(currentLang);
-            
-            // Update button text
-            if (langText) {
-                langText.textContent = currentLang === 'kn' ? 'English' : 'ಕನ್ನಡ';
-            }
         });
     }
 
@@ -71,15 +66,74 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Toggle other members section
-    const toggleMembersBtn = document.getElementById('toggleMembersBtn');
-    const otherMembersGrid = document.getElementById('otherMembersGrid');
+    // Directors Carousel - Auto-scroll with touch/swipe support
+    const directorsCarouselContainer = document.querySelector('.directors-carousel-container');
+    const directorsCarousel = document.getElementById('directorsCarousel');
     
-    if (toggleMembersBtn && otherMembersGrid) {
-        toggleMembersBtn.addEventListener('click', function() {
-            toggleMembersBtn.classList.toggle('active');
-            otherMembersGrid.classList.toggle('active');
+    if (directorsCarouselContainer && directorsCarousel) {
+        // Clone all director cards for seamless infinite scroll
+        const directorCards = directorsCarousel.querySelectorAll('.director-card');
+        directorCards.forEach(card => {
+            const clone = card.cloneNode(true);
+            directorsCarousel.appendChild(clone);
         });
+
+        let autoScrollInterval;
+        let isUserScrolling = false;
+        let scrollTimeout;
+        const scrollSpeed = 1; // pixels per frame
+        const scrollDelay = 20; // milliseconds between scrolls
+
+        function startAutoScroll() {
+            if (autoScrollInterval) return;
+            
+            autoScrollInterval = setInterval(() => {
+                if (!isUserScrolling) {
+                    directorsCarouselContainer.scrollLeft += scrollSpeed;
+                    
+                    // Reset to beginning when reaching halfway (since we duplicated)
+                    const maxScroll = directorsCarousel.scrollWidth / 2;
+                    if (directorsCarouselContainer.scrollLeft >= maxScroll) {
+                        directorsCarouselContainer.scrollLeft = 0;
+                    }
+                }
+            }, scrollDelay);
+        }
+
+        function stopAutoScroll() {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        function handleUserInteraction() {
+            isUserScrolling = true;
+            stopAutoScroll();
+            
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isUserScrolling = false;
+                startAutoScroll();
+            }, 2000); // Resume auto-scroll after 2 seconds of inactivity
+        }
+
+        // Mouse events
+        directorsCarouselContainer.addEventListener('mousedown', handleUserInteraction);
+        directorsCarouselContainer.addEventListener('mousemove', handleUserInteraction);
+        directorsCarouselContainer.addEventListener('mouseenter', stopAutoScroll);
+        directorsCarouselContainer.addEventListener('mouseleave', () => {
+            if (!isUserScrolling) {
+                startAutoScroll();
+            }
+        });
+
+        // Touch events
+        directorsCarouselContainer.addEventListener('touchstart', handleUserInteraction);
+        directorsCarouselContainer.addEventListener('touchmove', handleUserInteraction);
+
+        // Start auto-scroll
+        startAutoScroll();
     }
 
     // Smooth scroll for any anchor links (if needed in future)
