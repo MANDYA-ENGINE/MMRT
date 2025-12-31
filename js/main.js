@@ -135,7 +135,7 @@ function initializeEventCarousels() {
         const dotsContainer = card.querySelector('.carousel-dots');
         
         if (!carouselContainer || !slidesContainer) return;
-        
+    
         // Image extensions to try
         const extensions = ['jpeg', 'jpg', 'JPG', 'png', 'PNG'];
         const images = [];
@@ -162,13 +162,13 @@ function initializeEventCarousels() {
                         placeholder.appendChild(img);
                         slidesContainer.appendChild(placeholder);
                         carouselContainer.classList.add('single-image');
-                    } else {
+        } else {
                         renderCarousel();
                         // Start auto-slide after a short delay
                         setTimeout(() => {
                             if (images.length > 1) {
                                 startAutoSlide();
-                            }
+        }
                         }, 500);
                     }
                     return;
@@ -433,5 +433,5 @@ function initializeEventCarousels() {
         
         // Load images and initialize
         loadImages();
-    });
+});
 }
