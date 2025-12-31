@@ -284,7 +284,7 @@ function initializeEventCarousels() {
             
             updateCarousel();
             
-            // Function to set carousel height based on tallest image
+            // Function to set carousel height based on tallest image - no max height constraint
             function setCarouselHeight() {
                 if (imageElements.length === 0) return;
                 
@@ -294,21 +294,15 @@ function initializeEventCarousels() {
                 
                 imageElements.forEach(imgData => {
                     // Calculate what the height would be if image is scaled to container width
+                    // This ensures full image is visible without cropping
                     const aspectRatio = imgData.width / imgData.height;
                     const scaledHeight = containerWidth / aspectRatio;
                     
-                    // Cap at max-height from CSS (responsive: 400px mobile, 500px tablet, 600px desktop)
-                    let maxHeight = 400;
-                    if (window.innerWidth >= 1024) {
-                        maxHeight = 600;
-                    } else if (window.innerWidth >= 768) {
-                        maxHeight = 500;
-                    }
-                    const finalHeight = Math.min(scaledHeight, maxHeight);
-                    maxHeight = Math.max(maxHeight, finalHeight);
+                    // No max height constraint - show full image
+                    maxHeight = Math.max(maxHeight, scaledHeight);
                 });
                 
-                // Set minimum height
+                // Set minimum height only
                 maxHeight = Math.max(maxHeight, 200);
                 
                 // Apply height to carousel container and slides

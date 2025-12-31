@@ -362,6 +362,7 @@ section {
     margin-top: 2rem;
     position: relative;
     z-index: 1;
+    align-items: stretch;
 }
 
 .event-card {
@@ -370,6 +371,9 @@ section {
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .event-card:hover {
@@ -380,19 +384,17 @@ section {
 .event-image-carousel {
     width: 100%;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     background: var(--color-cream);
-    min-height: 200px;
 }
 
 .carousel-container {
     position: relative;
     width: 100%;
-    min-height: 200px;
 }
 
 .carousel-slides {
-    display: flex;
+        display: flex;
     width: 100%;
     transition: transform 0.5s ease-in-out;
     align-items: flex-start;
@@ -403,19 +405,20 @@ section {
     flex-shrink: 0;
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
+        align-items: center;
+        justify-content: center;
     background: var(--color-cream);
     width: 100%;
+    padding: 0;
 }
 
 .carousel-slide img {
     width: 100%;
     height: auto;
-    max-height: 400px;
     object-fit: contain;
     display: block;
     background: var(--color-cream);
+    max-width: 100%;
 }
 
 .carousel-btn {
@@ -432,7 +435,7 @@ section {
     align-items: center;
     justify-content: center;
     z-index: 10;
-    transition: all var(--transition-speed);
+        transition: all var(--transition-speed);
     color: var(--color-charcoal);
     font-size: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -496,6 +499,10 @@ section {
 
 .event-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 200px;
 }
 
 .event-name {
@@ -525,15 +532,21 @@ section {
     font-size: 0.95rem;
     color: var(--color-charcoal);
     line-height: 1.6;
-    margin-top: 1rem;
+    margin-top: auto;
+    flex-grow: 1;
 }
 
-/* Members Section - Simple Community Dots Pattern */
+/* Members Section - Simple Pattern like About and Events */
 .members-section {
     background-color: var(--color-white);
     background-image: 
-        radial-gradient(circle, rgba(255, 201, 78, 0.12) 2px, transparent 2px);
-    background-size: 60px 60px;
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 40px,
+            rgba(255, 201, 78, 0.08) 40px,
+            rgba(255, 201, 78, 0.08) 41px
+        );
     padding: 4rem 0;
     position: relative;
 }
@@ -918,7 +931,7 @@ section {
 }
 
 .footer-bottom p {
-    font-size: 0.85rem;
+        font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -938,7 +951,7 @@ section {
 
     .hero-address {
         font-size: 0.85rem;
-    }
+}
 
     .event-card {
         margin-bottom: 1rem;
@@ -1052,10 +1065,6 @@ section {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .carousel-slide img {
-        max-height: 500px;
-    }
-
     .core-grid-two {
         max-width: 600px;
     }
@@ -1146,10 +1155,6 @@ section {
 
     .events-grid {
         grid-template-columns: repeat(3, 1fr);
-    }
-
-    .carousel-slide img {
-        max-height: 600px;
     }
 
     .core-grid-two {
